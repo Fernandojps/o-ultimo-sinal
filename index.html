@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#09090c">
 
-  <title>O Último Sinal | Jogo 2D de Terror</title>
-  <meta name="description" content="Conheça O Último Sinal, um projeto escolar de desenvolvimento de jogos 2D da ETE Professor Paulo Freire.">
+  <title>O Último Sinal | Jogo 2D</title>
+  <meta name="description" content="Conheça O Último Sinal, um projeto escolar de jogo 2D desenvolvido por estudantes da ETE Professor Paulo Freire.">
 
   <style>
     :root {
@@ -90,13 +90,13 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 23px;
+      gap: 22px;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--muted);
-      font-size: .85rem;
+      font-size: .84rem;
       transition: color .2s;
     }
 
@@ -126,7 +126,7 @@
       background:
         linear-gradient(90deg,
           rgba(9,9,12,.98),
-          rgba(9,9,12,.83) 48%,
+          rgba(9,9,12,.82) 50%,
           rgba(9,9,12,.35)),
         linear-gradient(0deg, var(--bg), transparent 35%),
         url("assets/capa.jpg") center / cover no-repeat,
@@ -234,6 +234,13 @@
       margin-bottom: 34px;
     }
 
+    .dark-section {
+      background: #101014;
+      border-block: 1px solid #202027;
+    }
+
+    /* APRESENTAÇÃO */
+
     .about-grid {
       display: grid;
       grid-template-columns: 1.1fr .9fr;
@@ -252,11 +259,6 @@
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 5px;
-    }
-
-    .dark-section {
-      background: #101014;
-      border-block: 1px solid #202027;
     }
 
     /* CARTÕES */
@@ -450,8 +452,9 @@
 
     .team-box {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
       gap: 35px;
+      align-items: start;
       padding: 32px;
       background: var(--panel);
       border: 1px solid var(--border);
@@ -459,13 +462,25 @@
       border-radius: 5px;
     }
 
-    .team-box h3 {
+    .development-text {
+      min-width: 0;
+    }
+
+    .development-text h3 {
       font-size: 1.5rem;
-      margin: 10px 0;
+      margin: 10px 0 16px;
+    }
+
+    .development-text p {
+      margin-bottom: 16px;
+    }
+
+    .team-details {
+      min-width: 0;
     }
 
     .team-details p {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       color: var(--muted);
     }
 
@@ -473,14 +488,21 @@
       color: white;
     }
 
+    .students-title {
+      display: block;
+      margin: 20px 0 10px;
+      color: white;
+      font-weight: bold;
+    }
+
     .members {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
+      gap: 9px;
     }
 
     .member {
+      display: inline-block;
       padding: 8px 12px;
       background: #1c1c23;
       border: 1px solid var(--border);
@@ -509,7 +531,7 @@
       font-size: .84rem;
     }
 
-    /* VISUALIZADOR DE IMAGENS */
+    /* IMAGENS AMPLIADAS */
 
     dialog {
       width: min(950px, 92vw);
@@ -561,14 +583,16 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
         animation: none !important;
         transition: none !important;
       }
     }
 
-    /* CELULAR E TABLET */
+    /* TABLETS */
 
     @media (max-width: 900px) {
       .nav-links {
@@ -581,6 +605,11 @@
 
       .about-grid {
         gap: 28px;
+      }
+
+      .team-box {
+        gap: 24px;
+        padding: 24px;
       }
     }
 
@@ -611,13 +640,11 @@
       }
     }
 
+    /* CELULARES */
+
     @media (max-width: 560px) {
       header {
         height: 65px;
-      }
-
-      .nav {
-        position: relative;
       }
 
       .menu-toggle {
@@ -628,8 +655,8 @@
         display: none;
         position: absolute;
         top: 64px;
-        left: -5.5%;
-        right: -5.5%;
+        left: 0;
+        right: 0;
         padding: 20px 5%;
         background: #111116;
         border-bottom: 1px solid var(--border);
@@ -656,13 +683,7 @@
       }
 
       .team-box {
-        padding: 23px;
-      }
-    }
-
-    @media (min-width: 561px) {
-      .menu-toggle {
-        display: none;
+        padding: 22px;
       }
     }
   </style>
@@ -670,12 +691,17 @@
 
 <body>
 
+  <!-- MENU -->
   <header>
     <nav class="container">
       <a href="#inicio" class="logo">O ÚLTIMO <span>SINAL</span></a>
 
-      <button class="menu-toggle" id="menuToggle"
-              aria-label="Abrir menu" aria-expanded="false">
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="navLinks">
         ☰
       </button>
 
@@ -705,8 +731,13 @@
           nosso projeto de jogo 2D de terror.
         </p>
 
-        <a class="button primary" href="#sobre">Conhecer o projeto</a>
-        <a class="button secondary" href="#galeria">Ver imagens</a>
+        <a class="button primary" href="#sobre">
+          Conhecer o projeto
+        </a>
+
+        <a class="button secondary" href="#galeria">
+          Ver imagens
+        </a>
 
         <div class="metadata">
           <span>GÊNERO: TERROR</span>
@@ -716,7 +747,7 @@
       </div>
     </section>
 
-    <!-- SOBRE -->
+    <!-- SOBRE O JOGO -->
     <section id="sobre">
       <div class="container about-grid">
         <div>
@@ -731,20 +762,20 @@
 
           <p class="muted">
             A proposta envolve a criação de personagens,
-            cenários, animações e mecânicas próprias,
-            buscando construir uma experiência de jogo
-            com identidade visual sombria.
+            cenários, animações e mecânicas próprias, buscando
+            construir uma experiência com identidade visual sombria.
           </p>
 
           <p class="muted">
-            Nesta página, você poderá acompanhar imagens,
-            detalhes e etapas do desenvolvimento do projeto.
+            Esta página reúne informações, imagens e registros
+            das etapas de desenvolvimento do projeto.
           </p>
         </div>
 
-        <img class="about-image"
-             src="assets/gameplay1.png"
-             alt="Captura de tela de O Último Sinal">
+        <img
+          class="about-image"
+          src="assets/gameplay1.png"
+          alt="Captura de tela de O Último Sinal">
       </div>
     </section>
 
@@ -803,8 +834,9 @@
 
         <div class="characters">
           <article class="character">
-            <img src="assets/personagem.png"
-                 alt="Personagem principal do jogo">
+            <img
+              src="assets/personagem.png"
+              alt="Personagem principal do jogo">
 
             <div class="character-info">
               <span class="small-label">PROTAGONISTA</span>
@@ -817,8 +849,9 @@
           </article>
 
           <article class="character">
-            <img src="assets/monstro.png"
-                 alt="Criatura do jogo">
+            <img
+              src="assets/monstro.png"
+              alt="Criatura do jogo">
 
             <div class="character-info">
               <span class="small-label">CRIATURA</span>
@@ -840,37 +873,40 @@
         <h2>Galeria do projeto</h2>
 
         <p class="muted intro">
-          Capturas de tela e imagens reais do desenvolvimento
+          Capturas de tela e imagens do desenvolvimento
           de O Último Sinal.
         </p>
 
         <div class="gallery">
-          <button class="gallery-item"
-                  data-image="assets/gameplay1.png"
-                  data-caption="Gameplay">
+          <button
+            class="gallery-item"
+            data-image="assets/gameplay1.png"
+            data-caption="Gameplay">
             <img src="assets/gameplay1.png" alt="Gameplay 1">
             <span>Gameplay ↗</span>
           </button>
 
-          <button class="gallery-item"
-                  data-image="assets/gameplay2.png"
-                  data-caption="Exploração">
+          <button
+            class="gallery-item"
+            data-image="assets/gameplay2.png"
+            data-caption="Exploração">
             <img src="assets/gameplay2.png" alt="Gameplay 2">
             <span>Exploração ↗</span>
           </button>
 
-          <button class="gallery-item"
-                  data-image="assets/cenario.png"
-                  data-caption="Cenário">
+          <button
+            class="gallery-item"
+            data-image="assets/cenario.png"
+            data-caption="Cenário">
             <img src="assets/cenario.png" alt="Cenário do jogo">
             <span>Cenários ↗</span>
           </button>
 
-          <button class="gallery-item"
-                  data-image="assets/personagem.png"
-                  data-caption="Personagem">
-            <img src="assets/personagem.png"
-                 alt="Arte do personagem">
+          <button
+            class="gallery-item"
+            data-image="assets/personagem.png"
+            data-caption="Personagem">
+            <img src="assets/personagem.png" alt="Arte do personagem">
             <span>Personagens ↗</span>
           </button>
         </div>
@@ -884,8 +920,8 @@
         <h2>Como o jogo é desenvolvido</h2>
 
         <p class="muted intro">
-          O projeto é construído por etapas, desde o planejamento
-          até os testes e as melhorias.
+          O desenvolvimento é organizado em etapas, desde o
+          planejamento até os testes e as melhorias.
         </p>
 
         <div class="timeline">
@@ -947,97 +983,102 @@
           </div>
 
           <p class="muted" style="margin-top: 12px; font-size: .82rem">
-            Percentual ilustrativo. Atualize de acordo com
-            o andamento real do projeto.
+            Percentual ilustrativo. Atualize conforme o andamento real.
           </p>
         </div>
       </div>
     </section>
 
     <!-- EQUIPE -->
-  
+    <section class="dark-section" id="equipe">
+      <div class="container">
+        <span class="section-tag">06 / NOSSA EQUIPE</span>
+        <h2>Conheça quem está por trás do projeto</h2>
 
-<!-- EQUIPE -->
-<section class="dark-section" id="equipe">
-  <div class="container">
-    <span class="section-tag">06 / NOSSA EQUIPE</span>
-    <h2>Conheça quem está por trás do projeto</h2>
-
-    <p class="muted intro">
-      Somos uma equipe iniciante na área de desenvolvimento
-      de jogos, movida pela criatividade, pela curiosidade e
-      pelo interesse em tecnologia. Ao longo deste projeto,
-      estamos ampliando nossos conhecimentos, superando
-      desafios e aprimorando nossas habilidades.
-      Nosso objetivo é transformar nossas ideias em realidade,
-      trabalhando em conjunto e dando o nosso melhor para
-      desenvolver O Último Sinal.
-    </p>
-
-    <div class="team-box">
-      <!-- DESCRIÇÃO DO DESENVOLVIMENTO -->
-      <div>
-        <span class="small-label">DESENVOLVIMENTO</span>
-        <h3>O Último Sinal</h3>
-
-        <p class="muted">
-          O projeto consiste no desenvolvimento de um jogo 2D
-          com temática de terror, utilizando a Unity como
-          ferramenta principal. O processo envolve planejamento,
-          criação de personagens e cenários, desenvolvimento de
-          mecânicas, programação e testes.
+        <p class="muted intro">
+          Somos uma equipe iniciante na área de desenvolvimento
+          de jogos, movida pela criatividade, pela curiosidade e
+          pelo interesse em tecnologia. Ao longo deste projeto,
+          estamos ampliando nossos conhecimentos, superando
+          desafios e aprimorando nossas habilidades.
+          Nosso objetivo é transformar nossas ideias em realidade,
+          trabalhando em conjunto e dando o nosso melhor para
+          desenvolver O Último Sinal.
         </p>
 
-        <p class="muted">
-          Como desenvolvedores em início de trajetória,
-          encaramos este trabalho como uma oportunidade de
-          aprendizado e crescimento. Buscamos aplicar nossos
-          conhecimentos, explorar novas possibilidades e
-          evoluir continuamente, valorizando a colaboração
-          e a dedicação de cada integrante.
-        </p>
-      </div>
+        <div class="team-box">
 
-      <!-- INFORMAÇÕES DA EQUIPE -->
-      <div class="team-details">
-        <p><strong>Projeto:</strong> O Último Sinal</p>
+          <!-- COLUNA ESQUERDA: SOMENTE O TEXTO DA EQUIPE -->
+          <div class="development-text">
+            <span class="small-label">EQUIPE DE DESENVOLVIMENTO</span>
 
-        <p>
-          <strong>Escola:</strong>
-          ETE Professor Paulo Freire
-        </p>
+            <h3>O Último Sinal</h3>
 
-        <p>
-          <strong>Professor orientador:</strong>
-          Vinicius Marques
-        </p>
+            <p class="muted">
+              Este projeto representa nossa dedicação ao aprendizado,
+              à criatividade e ao trabalho em equipe. Embora estejamos
+              no início de nossa trajetória no desenvolvimento de jogos,
+              estamos comprometidos em dar o nosso melhor, aprender com
+              cada desafio e evoluir continuamente durante a construção
+              de O Último Sinal.
+            </p>
+          </div>
 
-        <p><strong>Estudantes:</strong></p>
+          <!-- COLUNA DIREITA: PROFESSOR, ESCOLA E ESTUDANTES -->
+          <div class="team-details">
+            <p>
+              <strong>Projeto:</strong> O Último Sinal
+            </p>
 
-        <div class="members">
-          <span class="member">Fernando José</span>
-          <span class="member">Adailton Pereira</span>
-          <span class="member">Wesley Nobre</span>
-          <span class="member">Hitalo Rodrigues</span>
-          <span class="member">Natanael Rodrigues</span>
+            <p>
+              <strong>Instituição:</strong> ETE Professor Paulo Freire
+            </p>
+
+            <p>
+              <strong>Professor orientador:</strong> Vinicius Marques
+            </p>
+
+            <p class="students-title">Estudantes</p>
+
+            <div class="members">
+              <span class="member">Fernando José</span>
+              <span class="member">Adailton Pereira</span>
+              <span class="member">Wesley Nobre</span>
+              <span class="member">Hitalo Rodrigues</span>
+              <span class="member">Natanael Rodrigues</span>
+            </div>
+
+            <p style="margin-top: 20px;">
+              <strong>Ano letivo:</strong> 2026
+            </p>
+
+            <p>
+              <strong>Área:</strong> Desenvolvimento de jogos 2D
+            </p>
+
+            <p>
+              <strong>Engine utilizada:</strong> Unity
+            </p>
+          </div>
+
         </div>
-
-        <p style="margin-top: 18px;">
-          <strong>Ano letivo:</strong> 2026
-        </p>
-
-        <p>
-          <strong>Área:</strong> Desenvolvimento de jogos 2D
-        </p>
-
-        <p><strong>Engine:</strong> Unity</p>
       </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <div class="container footer-content">
+      <a href="#inicio" class="logo">O ÚLTIMO <span>SINAL</span></a>
+
+      <p>Projeto escolar • ETE Professor Paulo Freire</p>
+
+      <a href="#inicio">Voltar ao topo ↑</a>
     </div>
-  </div>
-</section>
+  </footer>
 
-
-  <!-- GALERIA AMPLIADA -->
+  <!-- VISUALIZADOR DA GALERIA -->
   <dialog id="lightbox">
     <button class="close" id="closeLightbox">Fechar ✕</button>
     <img id="lightboxImage" src="" alt="">
@@ -1064,6 +1105,7 @@
       link.addEventListener("click", () => {
         navLinks.classList.remove("open");
         menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menu");
       });
     });
 
@@ -1096,7 +1138,8 @@
       lightboxImage.src = "";
     });
 
-    // PROGRESSO: ALTERE PARA O PERCENTUAL REAL
+    // PROGRESSO DO PROJETO
+    // Troque 25 pelo percentual real quando necessário.
 
     const progresso = 25;
     const valor = Math.max(0, Math.min(100, progresso));
