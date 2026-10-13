@@ -1,1 +1,988 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#09090c">
+
+  <title>O Último Sinal | Jogo 2D</title>
+  <meta name="description" content="Conheça O Último Sinal, um projeto escolar de jogo 2D de terror.">
+
+  <style>
+    :root {
+      --bg: #09090c;
+      --panel: #131319;
+      --text: #f1f1f3;
+      --muted: #a3a3ad;
+      --red: #c62838;
+      --border: #292930;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    /* MENU */
+
+    header {
+      height: 72px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(9, 9, 12, .95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-weight: 900;
+      letter-spacing: 2px;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--red);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+      font-size: .86rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    /* CAPA */
+
+    .hero {
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, #09090c 0%, rgba(9,9,12,.88) 45%, rgba(9,9,12,.4) 100%),
+        linear-gradient(0deg, #09090c 0%, transparent 35%),
+        url("assets/capa.jpg") center / cover no-repeat,
+        #171116;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-content {
+      padding: 90px 0;
+      max-width: 700px;
+      animation: aparecer .8s ease both;
+    }
+
+    .eyebrow {
+      color: #ed6470;
+      font-size: .75rem;
+      letter-spacing: 3px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin: 22px 0;
+    }
+
+    h1 span {
+      color: var(--red);
+    }
+
+    .hero p {
+      color: #c4c4cd;
+      max-width: 550px;
+      margin-bottom: 28px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 4px;
+      font-size: .9rem;
+      font-weight: bold;
+      margin: 0 8px 8px 0;
+      transition: .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .primary {
+      background: var(--red);
+    }
+
+    .secondary {
+      border: 1px solid #55555f;
+      background: rgba(10,10,14,.5);
+    }
+
+    .metadata {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      margin-top: 40px;
+      font-size: .7rem;
+      letter-spacing: 1.5px;
+      color: #b4b4be;
+    }
+
+    /* SEÇÕES */
+
+    section {
+      padding: 85px 0;
+    }
+
+    .tag {
+      color: #ed6470;
+      font-size: .72rem;
+      letter-spacing: 2.5px;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.2;
+      margin: 12px 0 18px;
+    }
+
+    h3 {
+      line-height: 1.3;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .intro {
+      max-width: 650px;
+      margin-bottom: 32px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .about-grid p {
+      margin-bottom: 15px;
+    }
+
+    .about-image {
+      width: 100%;
+      min-height: 270px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+    }
+
+    .dark-section {
+      background: #101014;
+      border-block: 1px solid #202027;
+    }
+
+    /* CARTÕES */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      transition: .25s;
+    }
+
+    .card:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+    }
+
+    .number {
+      color: var(--red);
+      font-weight: bold;
+      font-size: .8rem;
+    }
+
+    .card h3 {
+      margin: 13px 0 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    /* PERSONAGENS */
+
+    .characters {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .character {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 5px;
+    }
+
+    .character img {
+      width: 100%;
+      height: 300px;
+      object-fit: contain;
+      background: #111116;
+    }
+
+    .character-info {
+      padding: 22px;
+    }
+
+    .character-info h3 {
+      margin: 7px 0;
+    }
+
+    /* GALERIA */
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .gallery-item {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+      color: white;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #17171c;
+      transition: .3s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+
+    .gallery-item span {
+      display: block;
+      padding: 12px 15px;
+      font-size: .9rem;
+    }
+
+    /* ETAPAS */
+
+    .timeline {
+      max-width: 750px;
+      border-left: 1px solid #42424c;
+      margin: 35px 0;
+      padding-left: 28px;
+    }
+
+    .step {
+      position: relative;
+      padding-bottom: 30px;
+    }
+
+    .step:last-child {
+      padding-bottom: 0;
+    }
+
+    .step::before {
+      content: "";
+      position: absolute;
+      left: -34px;
+      top: 8px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .step h3 {
+      margin: 6px 0;
+    }
+
+    .tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .tech span {
+      padding: 8px 14px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: .85rem;
+    }
+
+    /* PROGRESSO */
+
+    .progress-box {
+      margin-top: 35px;
+      padding: 24px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+    }
+
+    .progress-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 12px;
+    }
+
+    .progress-heading span {
+      color: #ed6470;
+      font-weight: bold;
+    }
+
+    .progress-track {
+      height: 8px;
+      background: #303039;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 25%;
+      height: 100%;
+      background: var(--red);
+    }
+
+    /* EQUIPE */
+
+    .team-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      padding: 30px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      border-radius: 5px;
+    }
+
+    .team-box h3 {
+      margin: 10px 0;
+    }
+
+    .team-details p {
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    .team-details strong {
+      color: white;
+    }
+
+    /* RODAPÉ */
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    footer p,
+    footer a:last-child {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* JANELA DE IMAGEM */
+
+    dialog {
+      margin: auto;
+      padding: 20px;
+      width: min(950px, 92vw);
+      max-height: 90vh;
+      background: #121217;
+      color: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    dialog::backdrop {
+      background: rgba(0,0,0,.9);
+    }
+
+    dialog img {
+      max-width: 100%;
+      max-height: 75vh;
+      margin: auto;
+    }
+
+    dialog p {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .close {
+      display: block;
+      margin-left: auto;
+      margin-bottom: 12px;
+      padding: 5px 10px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: white;
+      cursor: pointer;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links {
+        gap: 12px;
+        font-size: .75rem;
+      }
+
+      .about-grid,
+      .cards,
+      .characters,
+      .gallery,
+      .team-box {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 540px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .character img {
+        height: 260px;
+      }
+
+      .footer-content {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        height: 65px;
+      }
+
+      .nav {
+        position: relative;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: -5.5%;
+        right: -5.5%;
+        padding: 20px 5%;
+        background: #111116;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        font-size: .95rem;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 5px 0;
+      }
+
+      .menu-toggle {
+        display: block;
+        padding: 8px 12px;
+        background: var(--panel);
+        color: white;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .hero-info {
+        gap: 12px;
+      }
+
+      .team-box {
+        padding: 22px;
+      }
+    }
+
+    @media (min-width: 561px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="container">
+      <a href="#inicio" class="logo">O ÚLTIMO <span>SINAL</span></a>
+
+      <button class="menu-toggle" id="menuToggle"
+              aria-label="Abrir menu" aria-expanded="false">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">O jogo</a></li>
+        <li><a href="#personagens">Personagens</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#desenvolvimento">Desenvolvimento</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="inicio">
+      <div class="container hero-content">
+        <span class="eyebrow">PROJETO ESCOLAR • JOGO 2D</span>
+
+        <h1>O Último<br><span>Sinal.</span></h1>
+
+        <p>
+          Em meio à escuridão, cada descoberta pode revelar
+          algo que deveria permanecer escondido. Conheça
+          nosso projeto de jogo 2D de terror.
+        </p>
+
+        <a class="button primary" href="#sobre">Descobrir o jogo</a>
+        <a class="button secondary" href="#galeria">Ver imagens</a>
+
+        <div class="metadata">
+          <span>GÊNERO: TERROR</span>
+          <span>FORMATO: 2D</span>
+          <span>ENGINE: UNITY</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container about-grid">
+        <div>
+          <span class="tag">01 / APRESENTAÇÃO</span>
+          <h2>Sobre o jogo</h2>
+
+          <p class="muted">
+            O Último Sinal é um projeto de jogo 2D de terror
+            desenvolvido como parte de uma atividade escolar.
+            A proposta é criar uma experiência com ambientação
+            sombria, exploração e criaturas misteriosas.
+          </p>
+
+          <p class="muted">
+            O projeto envolve a criação de personagens,
+            animações, cenários e mecânicas de jogo, utilizando
+            a Unity como ferramenta de desenvolvimento.
+          </p>
+
+          <p class="muted">
+            Esta página reúne informações e registros do
+            processo de criação do jogo.
+          </p>
+        </div>
+
+        <img class="about-image" src="assets/gameplay1.png"
+             alt="Captura de tela de O Último Sinal">
+      </div>
+    </section>
+
+    <section class="dark-section">
+      <div class="container">
+        <span class="tag">02 / EXPERIÊNCIA</span>
+        <h2>O que você encontrará?</h2>
+
+        <p class="muted intro">
+          Os principais elementos que estamos desenvolvendo
+          para construir a identidade do jogo.
+        </p>
+
+        <div class="cards">
+          <article class="card">
+            <span class="number">01</span>
+            <h3>Exploração</h3>
+            <p>
+              Cenários que incentivam o jogador a descobrir
+              o ambiente e seus segredos.
+            </p>
+          </article>
+
+          <article class="card">
+            <span class="number">02</span>
+            <h3>Atmosfera de terror</h3>
+            <p>
+              Uma identidade visual sombria construída
+              com cenários, iluminação e criaturas.
+            </p>
+          </article>
+
+          <article class="card">
+            <span class="number">03</span>
+            <h3>Desafios</h3>
+            <p>
+              Mecânicas e obstáculos planejados para
+              tornar a experiência mais envolvente.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="personagens">
+      <div class="container">
+        <span class="tag">03 / UNIVERSO</span>
+        <h2>Personagens e criaturas</h2>
+
+        <p class="muted intro">
+          Conheça os elementos visuais que fazem parte
+          do universo do jogo.
+        </p>
+
+        <div class="characters">
+          <article class="character">
+            <img src="assets/personagem.png"
+                 alt="Personagem principal">
+            <div class="character-info">
+              <span class="tag">PROTAGONISTA</span>
+              <h3>O personagem principal</h3>
+              <p class="muted">
+                [Escreva aqui a história e as características
+                do protagonista.]
+              </p>
+            </div>
+          </article>
+
+          <article class="character">
+            <img src="assets/monstro.png"
+                 alt="Criatura inimiga">
+            <div class="character-info">
+              <span class="tag">AMEAÇA</span>
+              <h3>A criatura</h3>
+              <p class="muted">
+                [Descreva aqui o monstro e seu papel no jogo.]
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="galeria">
+      <div class="container">
+        <span class="tag">04 / REGISTROS</span>
+        <h2>Galeria do projeto</h2>
+
+        <p class="muted intro">
+          Capturas de tela, personagens e cenários do
+          desenvolvimento de O Último Sinal.
+        </p>
+
+        <div class="gallery">
+          <button class="gallery-item"
+                  data-image="assets/gameplay1.png"
+                  data-caption="Gameplay">
+            <img src="assets/gameplay1.png" alt="Gameplay 1">
+            <span>Gameplay ↗</span>
+          </button>
+
+          <button class="gallery-item"
+                  data-image="assets/gameplay2.png"
+                  data-caption="Exploração">
+            <img src="assets/gameplay2.png" alt="Gameplay 2">
+            <span>Exploração ↗</span>
+          </button>
+
+          <button class="gallery-item"
+                  data-image="assets/cenario.png"
+                  data-caption="Cenário">
+            <img src="assets/cenario.png" alt="Cenário do jogo">
+            <span>Cenário ↗</span>
+          </button>
+
+          <button class="gallery-item"
+                  data-image="assets/personagem.png"
+                  data-caption="Personagem">
+            <img src="assets/personagem.png"
+                 alt="Personagem do jogo">
+            <span>Personagem ↗</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="desenvolvimento">
+      <div class="container">
+        <span class="tag">05 / PRODUÇÃO</span>
+        <h2>Como o jogo é desenvolvido</h2>
+
+        <p class="muted intro">
+          O projeto é construído por etapas, desde o planejamento
+          até os testes de funcionamento.
+        </p>
+
+        <div class="timeline">
+          <article class="step">
+            <span class="tag">ETAPA 01</span>
+            <h3>Planejamento</h3>
+            <p class="muted">
+              Definição da proposta, do gênero e das mecânicas.
+            </p>
+          </article>
+
+          <article class="step">
+            <span class="tag">ETAPA 02</span>
+            <h3>Arte e animação</h3>
+            <p class="muted">
+              Criação de sprites, personagens, cenários
+              e animações.
+            </p>
+          </article>
+
+          <article class="step">
+            <span class="tag">ETAPA 03</span>
+            <h3>Programação</h3>
+            <p class="muted">
+              Implementação dos controles, movimentação,
+              colisões e demais sistemas.
+            </p>
+          </article>
+
+          <article class="step">
+            <span class="tag">ETAPA 04</span>
+            <h3>Testes e melhorias</h3>
+            <p class="muted">
+              Ajustes e testes conforme o jogo evolui.
+            </p>
+          </article>
+        </div>
+
+        <h3>Tecnologias utilizadas</h3>
+
+        <div class="tech">
+          <span>Unity</span>
+          <span>C#</span>
+          <span>Pixel Art</span>
+          <span>GitHub</span>
+        </div>
+
+        <div class="progress-box">
+          <div class="progress-heading">
+            <h3>Progresso do projeto</h3>
+            <span id="progressValue">25%</span>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <p class="muted" style="margin-top: 12px; font-size: .82rem">
+            Percentual ilustrativo. Atualize conforme o
+            andamento real do desenvolvimento.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="equipe">
+      <div class="container">
+        <span class="tag">06 / CRÉDITOS</span>
+        <h2>Equipe do projeto</h2>
+
+        <p class="muted intro">
+          Projeto desenvolvido por estudantes como parte
+          de uma atividade escolar.
+        </p>
+
+        <div class="team-box">
+          <div>
+            <span class="tag">DESENVOLVIMENTO DE JOGOS</span>
+            <h3>Nossa equipe</h3>
+            <p class="muted">
+              [Escreva uma breve apresentação do grupo e
+              da proposta do trabalho.]
+            </p>
+          </div>
+
+          <div class="team-details">
+            <p><strong>Integrantes:</strong> [Nomes]</p>
+            <p><strong>Escola:</strong> [Nome da escola]</p>
+            <p><strong>Professor:</strong> [Nome do professor]</p>
+            <p><strong>Ano:</strong> 2026</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <a href="#inicio" class="logo">O ÚLTIMO <span>SINAL</span></a>
+      <p>Projeto escolar • Jogo 2D de terror</p>
+      <a href="#inicio">Voltar ao topo ↑</a>
+    </div>
+  </footer>
+
+  <dialog id="lightbox">
+    <button class="close" id="closeLightbox">Fechar ✕</button>
+    <img id="lightboxImage" src="" alt="">
+    <p id="lightboxCaption"></p>
+  </dialog>
+
+  <script>
+    // MENU PARA CELULAR
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const aberto = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(aberto));
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // GALERIA AMPLIADA
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+
+    document.querySelectorAll(".gallery-item").forEach(item => {
+      item.addEventListener("click", () => {
+        lightboxImage.src = item.dataset.image;
+        lightboxImage.alt = item.dataset.caption;
+        lightboxCaption.textContent = item.dataset.caption;
+        lightbox.showModal();
+      });
+    });
+
+    document.getElementById("closeLightbox").addEventListener("click", () => {
+      lightbox.close();
+    });
+
+    lightbox.addEventListener("click", event => {
+      if (event.target === lightbox) {
+        lightbox.close();
+      }
+    });
+
+    lightbox.addEventListener("close", () => {
+      lightboxImage.src = "";
+    });
+
+    // PROGRESSO DO PROJETO: ALTERE O NÚMERO ABAIXO
+
+    const progresso = 25;
+    const valor = Math.max(0, Math.min(100, progresso));
+
+    document.getElementById("progressValue").textContent = valor + "%";
+    document.getElementById("progressFill").style.width = valor + "%";
+  </script>
+
+</body>
+</html>
+
