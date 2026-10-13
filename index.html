@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#09090c">
 
-  <title>O Último Sinal | Jogo 2D</title>
-  <meta name="description" content="Conheça O Último Sinal, um projeto escolar de jogo 2D de terror.">
+  <title>O Último Sinal | Jogo 2D de Terror</title>
+  <meta name="description" content="Conheça O Último Sinal, um projeto escolar de desenvolvimento de jogos 2D da ETE Professor Paulo Freire.">
 
   <style>
     :root {
@@ -27,24 +27,28 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 80px;
+      scroll-padding-top: 85px;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
       background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1.7;
     }
 
     a {
-      text-decoration: none;
       color: inherit;
+      text-decoration: none;
     }
 
     img {
       display: block;
       max-width: 100%;
+    }
+
+    button {
+      font: inherit;
     }
 
     .container {
@@ -55,11 +59,11 @@
     /* MENU */
 
     header {
-      height: 72px;
       position: sticky;
       top: 0;
-      z-index: 10;
-      background: rgba(9, 9, 12, .95);
+      z-index: 20;
+      height: 72px;
+      background: rgba(9, 9, 12, .96);
       border-bottom: 1px solid var(--border);
       backdrop-filter: blur(12px);
     }
@@ -67,15 +71,15 @@
     nav {
       height: 100%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 20px;
     }
 
     .logo {
+      font-size: 1rem;
       font-weight: 900;
       letter-spacing: 2px;
-      font-size: 1rem;
       white-space: nowrap;
     }
 
@@ -84,49 +88,70 @@
     }
 
     .nav-links {
-      list-style: none;
       display: flex;
-      gap: 24px;
-      font-size: .86rem;
-      color: var(--muted);
+      align-items: center;
+      gap: 23px;
+      list-style: none;
     }
 
-    .nav-links a:hover {
+    .nav-links a {
+      color: var(--muted);
+      font-size: .85rem;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
       color: white;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: var(--panel);
+      color: white;
+      border: 1px solid var(--border);
+      padding: 7px 12px;
+      border-radius: 4px;
+      cursor: pointer;
     }
 
     /* CAPA */
 
     .hero {
-      min-height: 600px;
+      min-height: 620px;
       display: flex;
       align-items: center;
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(90deg, #09090c 0%, rgba(9,9,12,.88) 45%, rgba(9,9,12,.4) 100%),
-        linear-gradient(0deg, #09090c 0%, transparent 35%),
+        linear-gradient(90deg,
+          rgba(9,9,12,.98),
+          rgba(9,9,12,.83) 48%,
+          rgba(9,9,12,.35)),
+        linear-gradient(0deg, var(--bg), transparent 35%),
         url("assets/capa.jpg") center / cover no-repeat,
         #171116;
       border-bottom: 1px solid var(--border);
     }
 
     .hero-content {
+      max-width: 720px;
       padding: 90px 0;
-      max-width: 700px;
       animation: aparecer .8s ease both;
     }
 
-    .eyebrow {
+    .eyebrow,
+    .section-tag,
+    .small-label {
       color: #ed6470;
-      font-size: .75rem;
-      letter-spacing: 3px;
+      font-size: .73rem;
       font-weight: bold;
+      letter-spacing: 2.5px;
     }
 
     h1 {
-      font-size: clamp(3rem, 8vw, 6rem);
-      line-height: 1;
+      font-size: clamp(3.2rem, 8vw, 6.3rem);
+      line-height: .98;
       letter-spacing: -3px;
       margin: 22px 0;
     }
@@ -135,19 +160,20 @@
       color: var(--red);
     }
 
-    .hero p {
+    .hero-description {
+      max-width: 560px;
       color: #c4c4cd;
-      max-width: 550px;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
     }
 
     .button {
       display: inline-block;
       padding: 12px 20px;
+      margin: 0 8px 8px 0;
+      border: 1px solid transparent;
       border-radius: 4px;
       font-size: .9rem;
       font-weight: bold;
-      margin: 0 8px 8px 0;
       transition: .2s;
     }
 
@@ -159,19 +185,27 @@
       background: var(--red);
     }
 
+    .primary:hover {
+      background: #e33a4c;
+    }
+
     .secondary {
-      border: 1px solid #55555f;
-      background: rgba(10,10,14,.5);
+      border-color: #55555f;
+      background: rgba(10,10,14,.6);
+    }
+
+    .secondary:hover {
+      background: var(--panel);
     }
 
     .metadata {
       display: flex;
       flex-wrap: wrap;
       gap: 22px;
-      margin-top: 40px;
+      margin-top: 42px;
+      color: #b4b4be;
       font-size: .7rem;
       letter-spacing: 1.5px;
-      color: #b4b4be;
     }
 
     /* SEÇÕES */
@@ -180,21 +214,15 @@
       padding: 85px 0;
     }
 
-    .tag {
-      color: #ed6470;
-      font-size: .72rem;
-      letter-spacing: 2.5px;
-      font-weight: bold;
-    }
-
     h2 {
       font-size: clamp(2rem, 5vw, 3rem);
       line-height: 1.2;
       margin: 12px 0 18px;
+      letter-spacing: -1px;
     }
 
     h3 {
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .muted {
@@ -202,8 +230,8 @@
     }
 
     .intro {
-      max-width: 650px;
-      margin-bottom: 32px;
+      max-width: 680px;
+      margin-bottom: 34px;
     }
 
     .about-grid {
@@ -214,12 +242,11 @@
     }
 
     .about-grid p {
-      margin-bottom: 15px;
+      margin-bottom: 16px;
     }
 
     .about-image {
       width: 100%;
-      min-height: 270px;
       aspect-ratio: 4 / 3;
       object-fit: cover;
       background: var(--panel);
@@ -241,22 +268,22 @@
     }
 
     .card {
+      padding: 27px;
       background: var(--panel);
-      padding: 26px;
       border: 1px solid var(--border);
       border-radius: 5px;
-      transition: .25s;
+      transition: transform .25s, border-color .25s;
     }
 
     .card:hover {
-      border-color: var(--red);
       transform: translateY(-4px);
+      border-color: var(--red);
     }
 
     .number {
       color: var(--red);
-      font-weight: bold;
       font-size: .8rem;
+      font-weight: bold;
     }
 
     .card h3 {
@@ -273,13 +300,13 @@
     .characters {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 22px;
     }
 
     .character {
       overflow: hidden;
-      border: 1px solid var(--border);
       background: var(--panel);
+      border: 1px solid var(--border);
       border-radius: 5px;
     }
 
@@ -291,11 +318,11 @@
     }
 
     .character-info {
-      padding: 22px;
+      padding: 23px;
     }
 
     .character-info h3 {
-      margin: 7px 0;
+      margin: 8px 0;
     }
 
     /* GALERIA */
@@ -307,14 +334,13 @@
     }
 
     .gallery-item {
+      color: white;
+      text-align: left;
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 5px;
       overflow: hidden;
-      color: white;
-      text-align: left;
-      cursor: pointer;
-      font: inherit;
+      cursor: zoom-in;
     }
 
     .gallery-item img {
@@ -322,31 +348,32 @@
       aspect-ratio: 16 / 9;
       object-fit: cover;
       background: #17171c;
-      transition: .3s;
+      transition: transform .3s, opacity .3s;
     }
 
     .gallery-item:hover img {
       transform: scale(1.03);
+      opacity: .85;
     }
 
     .gallery-item span {
       display: block;
-      padding: 12px 15px;
+      padding: 13px 15px;
       font-size: .9rem;
     }
 
-    /* ETAPAS */
+    /* DESENVOLVIMENTO */
 
     .timeline {
-      max-width: 750px;
-      border-left: 1px solid #42424c;
+      max-width: 760px;
       margin: 35px 0;
       padding-left: 28px;
+      border-left: 1px solid #42424c;
     }
 
     .step {
       position: relative;
-      padding-bottom: 30px;
+      padding-bottom: 32px;
     }
 
     .step:last-child {
@@ -356,23 +383,23 @@
     .step::before {
       content: "";
       position: absolute;
-      left: -34px;
       top: 8px;
+      left: -34px;
       width: 11px;
       height: 11px;
-      border-radius: 50%;
       background: var(--red);
+      border-radius: 50%;
     }
 
     .step h3 {
-      margin: 6px 0;
+      margin: 7px 0;
     }
 
     .tech {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 25px;
+      margin-top: 23px;
     }
 
     .tech span {
@@ -386,8 +413,8 @@
     /* PROGRESSO */
 
     .progress-box {
-      margin-top: 35px;
       padding: 24px;
+      margin-top: 35px;
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 5px;
@@ -397,7 +424,7 @@
       display: flex;
       justify-content: space-between;
       gap: 15px;
-      margin-bottom: 12px;
+      margin-bottom: 13px;
     }
 
     .progress-heading span {
@@ -407,15 +434,16 @@
 
     .progress-track {
       height: 8px;
+      overflow: hidden;
       background: #303039;
       border-radius: 10px;
-      overflow: hidden;
     }
 
     .progress-fill {
       width: 25%;
       height: 100%;
       background: var(--red);
+      transition: width .5s;
     }
 
     /* EQUIPE */
@@ -423,8 +451,8 @@
     .team-box {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      padding: 30px;
+      gap: 35px;
+      padding: 32px;
       background: var(--panel);
       border: 1px solid var(--border);
       border-left: 3px solid var(--red);
@@ -432,16 +460,32 @@
     }
 
     .team-box h3 {
+      font-size: 1.5rem;
       margin: 10px 0;
     }
 
     .team-details p {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       color: var(--muted);
     }
 
     .team-details strong {
       color: white;
+    }
+
+    .members {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .member {
+      padding: 8px 12px;
+      background: #1c1c23;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: .88rem;
     }
 
     /* RODAPÉ */
@@ -454,26 +498,26 @@
     .footer-content {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      align-items: center;
+      gap: 18px;
     }
 
     footer p,
     footer a:last-child {
       color: var(--muted);
-      font-size: .85rem;
+      font-size: .84rem;
     }
 
-    /* JANELA DE IMAGEM */
+    /* VISUALIZADOR DE IMAGENS */
 
     dialog {
-      margin: auto;
-      padding: 20px;
       width: min(950px, 92vw);
       max-height: 90vh;
-      background: #121217;
+      margin: auto;
+      padding: 20px;
       color: white;
+      background: #121217;
       border: 1px solid var(--border);
       border-radius: 6px;
     }
@@ -486,22 +530,22 @@
       max-width: 100%;
       max-height: 75vh;
       margin: auto;
+      object-fit: contain;
     }
 
     dialog p {
+      margin-top: 12px;
       text-align: center;
       color: var(--muted);
-      margin-top: 12px;
     }
 
     .close {
       display: block;
-      margin-left: auto;
-      margin-bottom: 12px;
-      padding: 5px 10px;
+      margin: 0 0 12px auto;
+      padding: 6px 12px;
+      color: white;
       background: transparent;
       border: 1px solid var(--border);
-      color: white;
       cursor: pointer;
     }
 
@@ -516,12 +560,31 @@
       }
     }
 
-    @media (max-width: 760px) {
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* CELULAR E TABLET */
+
+    @media (max-width: 900px) {
       .nav-links {
         gap: 12px;
-        font-size: .75rem;
       }
 
+      .nav-links a {
+        font-size: .77rem;
+      }
+
+      .about-grid {
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 760px) {
       .about-grid,
       .cards,
       .characters,
@@ -531,15 +594,11 @@
       }
 
       .hero {
-        min-height: 540px;
-      }
-
-      .hero h1 {
-        letter-spacing: -1px;
+        min-height: 550px;
       }
 
       section {
-        padding: 60px 0;
+        padding: 62px 0;
       }
 
       .character img {
@@ -547,8 +606,8 @@
       }
 
       .footer-content {
-        align-items: flex-start;
         flex-direction: column;
+        align-items: flex-start;
       }
     }
 
@@ -561,6 +620,10 @@
         position: relative;
       }
 
+      .menu-toggle {
+        display: block;
+      }
+
       .nav-links {
         display: none;
         position: absolute;
@@ -571,7 +634,7 @@
         background: #111116;
         border-bottom: 1px solid var(--border);
         flex-direction: column;
-        font-size: .95rem;
+        align-items: stretch;
       }
 
       .nav-links.open {
@@ -581,24 +644,19 @@
       .nav-links a {
         display: block;
         padding: 5px 0;
+        font-size: .95rem;
       }
 
-      .menu-toggle {
-        display: block;
-        padding: 8px 12px;
-        background: var(--panel);
-        color: white;
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        cursor: pointer;
+      .hero h1 {
+        letter-spacing: -1.5px;
       }
 
-      .hero-info {
+      .metadata {
         gap: 12px;
       }
 
       .team-box {
-        padding: 22px;
+        padding: 23px;
       }
     }
 
@@ -617,7 +675,9 @@
       <a href="#inicio" class="logo">O ÚLTIMO <span>SINAL</span></a>
 
       <button class="menu-toggle" id="menuToggle"
-              aria-label="Abrir menu" aria-expanded="false">☰</button>
+              aria-label="Abrir menu" aria-expanded="false">
+        ☰
+      </button>
 
       <ul class="nav-links" id="navLinks">
         <li><a href="#inicio">Início</a></li>
@@ -632,19 +692,20 @@
 
   <main>
 
+    <!-- CAPA -->
     <section class="hero" id="inicio">
       <div class="container hero-content">
         <span class="eyebrow">PROJETO ESCOLAR • JOGO 2D</span>
 
         <h1>O Último<br><span>Sinal.</span></h1>
 
-        <p>
+        <p class="hero-description">
           Em meio à escuridão, cada descoberta pode revelar
           algo que deveria permanecer escondido. Conheça
           nosso projeto de jogo 2D de terror.
         </p>
 
-        <a class="button primary" href="#sobre">Descobrir o jogo</a>
+        <a class="button primary" href="#sobre">Conhecer o projeto</a>
         <a class="button secondary" href="#galeria">Ver imagens</a>
 
         <div class="metadata">
@@ -655,44 +716,47 @@
       </div>
     </section>
 
+    <!-- SOBRE -->
     <section id="sobre">
       <div class="container about-grid">
         <div>
-          <span class="tag">01 / APRESENTAÇÃO</span>
+          <span class="section-tag">01 / APRESENTAÇÃO</span>
           <h2>Sobre o jogo</h2>
 
           <p class="muted">
-            O Último Sinal é um projeto de jogo 2D de terror
-            desenvolvido como parte de uma atividade escolar.
-            A proposta é criar uma experiência com ambientação
-            sombria, exploração e criaturas misteriosas.
+            O Último Sinal é um projeto de jogo 2D com temática
+            de terror, desenvolvido por estudantes da ETE
+            Professor Paulo Freire.
           </p>
 
           <p class="muted">
-            O projeto envolve a criação de personagens,
-            animações, cenários e mecânicas de jogo, utilizando
-            a Unity como ferramenta de desenvolvimento.
+            A proposta envolve a criação de personagens,
+            cenários, animações e mecânicas próprias,
+            buscando construir uma experiência de jogo
+            com identidade visual sombria.
           </p>
 
           <p class="muted">
-            Esta página reúne informações e registros do
-            processo de criação do jogo.
+            Nesta página, você poderá acompanhar imagens,
+            detalhes e etapas do desenvolvimento do projeto.
           </p>
         </div>
 
-        <img class="about-image" src="assets/gameplay1.png"
+        <img class="about-image"
+             src="assets/gameplay1.png"
              alt="Captura de tela de O Último Sinal">
       </div>
     </section>
 
+    <!-- CARACTERÍSTICAS -->
     <section class="dark-section">
       <div class="container">
-        <span class="tag">02 / EXPERIÊNCIA</span>
-        <h2>O que você encontrará?</h2>
+        <span class="section-tag">02 / EXPERIÊNCIA</span>
+        <h2>Elementos do jogo</h2>
 
         <p class="muted intro">
-          Os principais elementos que estamos desenvolvendo
-          para construir a identidade do jogo.
+          Os principais elementos que ajudam a construir
+          a identidade de O Último Sinal.
         </p>
 
         <div class="cards">
@@ -709,8 +773,8 @@
             <span class="number">02</span>
             <h3>Atmosfera de terror</h3>
             <p>
-              Uma identidade visual sombria construída
-              com cenários, iluminação e criaturas.
+              Uma identidade visual sombria, construída
+              por meio de cenários e criaturas.
             </p>
           </article>
 
@@ -726,9 +790,10 @@
       </div>
     </section>
 
+    <!-- PERSONAGENS -->
     <section id="personagens">
       <div class="container">
-        <span class="tag">03 / UNIVERSO</span>
+        <span class="section-tag">03 / UNIVERSO</span>
         <h2>Personagens e criaturas</h2>
 
         <p class="muted intro">
@@ -739,25 +804,28 @@
         <div class="characters">
           <article class="character">
             <img src="assets/personagem.png"
-                 alt="Personagem principal">
+                 alt="Personagem principal do jogo">
+
             <div class="character-info">
-              <span class="tag">PROTAGONISTA</span>
-              <h3>O personagem principal</h3>
+              <span class="small-label">PROTAGONISTA</span>
+              <h3>Personagem principal</h3>
               <p class="muted">
-                [Escreva aqui a história e as características
-                do protagonista.]
+                Adicione aqui a história e as características
+                do protagonista.
               </p>
             </div>
           </article>
 
           <article class="character">
             <img src="assets/monstro.png"
-                 alt="Criatura inimiga">
+                 alt="Criatura do jogo">
+
             <div class="character-info">
-              <span class="tag">AMEAÇA</span>
-              <h3>A criatura</h3>
+              <span class="small-label">CRIATURA</span>
+              <h3>O inimigo</h3>
               <p class="muted">
-                [Descreva aqui o monstro e seu papel no jogo.]
+                Adicione aqui informações sobre a criatura
+                e seu papel na história.
               </p>
             </div>
           </article>
@@ -765,14 +833,15 @@
       </div>
     </section>
 
+    <!-- GALERIA -->
     <section class="dark-section" id="galeria">
       <div class="container">
-        <span class="tag">04 / REGISTROS</span>
+        <span class="section-tag">04 / REGISTROS</span>
         <h2>Galeria do projeto</h2>
 
         <p class="muted intro">
-          Capturas de tela, personagens e cenários do
-          desenvolvimento de O Último Sinal.
+          Capturas de tela e imagens reais do desenvolvimento
+          de O Último Sinal.
         </p>
 
         <div class="gallery">
@@ -794,50 +863,52 @@
                   data-image="assets/cenario.png"
                   data-caption="Cenário">
             <img src="assets/cenario.png" alt="Cenário do jogo">
-            <span>Cenário ↗</span>
+            <span>Cenários ↗</span>
           </button>
 
           <button class="gallery-item"
                   data-image="assets/personagem.png"
                   data-caption="Personagem">
             <img src="assets/personagem.png"
-                 alt="Personagem do jogo">
-            <span>Personagem ↗</span>
+                 alt="Arte do personagem">
+            <span>Personagens ↗</span>
           </button>
         </div>
       </div>
     </section>
 
+    <!-- DESENVOLVIMENTO -->
     <section id="desenvolvimento">
       <div class="container">
-        <span class="tag">05 / PRODUÇÃO</span>
+        <span class="section-tag">05 / PRODUÇÃO</span>
         <h2>Como o jogo é desenvolvido</h2>
 
         <p class="muted intro">
           O projeto é construído por etapas, desde o planejamento
-          até os testes de funcionamento.
+          até os testes e as melhorias.
         </p>
 
         <div class="timeline">
           <article class="step">
-            <span class="tag">ETAPA 01</span>
+            <span class="small-label">ETAPA 01</span>
             <h3>Planejamento</h3>
             <p class="muted">
-              Definição da proposta, do gênero e das mecânicas.
+              Definição da proposta, do estilo visual
+              e das mecânicas do jogo.
             </p>
           </article>
 
           <article class="step">
-            <span class="tag">ETAPA 02</span>
+            <span class="small-label">ETAPA 02</span>
             <h3>Arte e animação</h3>
             <p class="muted">
-              Criação de sprites, personagens, cenários
-              e animações.
+              Criação dos personagens, sprites,
+              cenários e animações.
             </p>
           </article>
 
           <article class="step">
-            <span class="tag">ETAPA 03</span>
+            <span class="small-label">ETAPA 03</span>
             <h3>Programação</h3>
             <p class="muted">
               Implementação dos controles, movimentação,
@@ -846,10 +917,11 @@
           </article>
 
           <article class="step">
-            <span class="tag">ETAPA 04</span>
+            <span class="small-label">ETAPA 04</span>
             <h3>Testes e melhorias</h3>
             <p class="muted">
-              Ajustes e testes conforme o jogo evolui.
+              Verificação do funcionamento e ajustes
+              durante o desenvolvimento.
             </p>
           </article>
         </div>
@@ -861,6 +933,7 @@
           <span>C#</span>
           <span>Pixel Art</span>
           <span>GitHub</span>
+          <span>GitHub Pages</span>
         </div>
 
         <div class="progress-box">
@@ -874,38 +947,52 @@
           </div>
 
           <p class="muted" style="margin-top: 12px; font-size: .82rem">
-            Percentual ilustrativo. Atualize conforme o
-            andamento real do desenvolvimento.
+            Percentual ilustrativo. Atualize de acordo com
+            o andamento real do projeto.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- EQUIPE -->
     <section class="dark-section" id="equipe">
       <div class="container">
-        <span class="tag">06 / CRÉDITOS</span>
-        <h2>Equipe do projeto</h2>
+        <span class="section-tag">06 / CRÉDITOS</span>
+        <h2>Quem desenvolve o projeto?</h2>
 
         <p class="muted intro">
-          Projeto desenvolvido por estudantes como parte
-          de uma atividade escolar.
+          O Último Sinal é um projeto escolar desenvolvido
+          por estudantes da ETE Professor Paulo Freire,
+          sob orientação do professor Vinicius Marques.
         </p>
 
         <div class="team-box">
           <div>
-            <span class="tag">DESENVOLVIMENTO DE JOGOS</span>
-            <h3>Nossa equipe</h3>
+            <span class="small-label">EQUIPE DE DESENVOLVIMENTO</span>
+            <h3>O Último Sinal</h3>
+
             <p class="muted">
-              [Escreva uma breve apresentação do grupo e
-              da proposta do trabalho.]
+              Um projeto colaborativo de criação de um jogo
+              2D, envolvendo planejamento, desenvolvimento
+              e construção de elementos visuais.
             </p>
+
+            <div class="members">
+              <span class="member">Fernando José</span>
+              <span class="member">Adailton Pereira</span>
+              <span class="member">Wesley Nobre</span>
+              <span class="member">Hitalo Rodrigues</span>
+              <span class="member">Natanael Rodrigues</span>
+            </div>
           </div>
 
           <div class="team-details">
-            <p><strong>Integrantes:</strong> [Nomes]</p>
-            <p><strong>Escola:</strong> [Nome da escola]</p>
-            <p><strong>Professor:</strong> [Nome do professor]</p>
-            <p><strong>Ano:</strong> 2026</p>
+            <p><strong>Projeto:</strong> O Último Sinal</p>
+            <p><strong>Escola:</strong> ETE Professor Paulo Freire</p>
+            <p><strong>Professor:</strong> Vinicius Marques</p>
+            <p><strong>Integrantes:</strong> 5 estudantes</p>
+            <p><strong>Ano letivo:</strong> 2026</p>
+            <p><strong>Categoria:</strong> Desenvolvimento de jogos 2D</p>
           </div>
         </div>
       </div>
@@ -913,14 +1000,18 @@
 
   </main>
 
+  <!-- RODAPÉ -->
   <footer>
     <div class="container footer-content">
       <a href="#inicio" class="logo">O ÚLTIMO <span>SINAL</span></a>
-      <p>Projeto escolar • Jogo 2D de terror</p>
+
+      <p>Projeto escolar • ETE Professor Paulo Freire</p>
+
       <a href="#inicio">Voltar ao topo ↑</a>
     </div>
   </footer>
 
+  <!-- GALERIA AMPLIADA -->
   <dialog id="lightbox">
     <button class="close" id="closeLightbox">Fechar ✕</button>
     <img id="lightboxImage" src="" alt="">
@@ -935,7 +1026,12 @@
 
     menuToggle.addEventListener("click", () => {
       const aberto = navLinks.classList.toggle("open");
+
       menuToggle.setAttribute("aria-expanded", String(aberto));
+      menuToggle.setAttribute(
+        "aria-label",
+        aberto ? "Fechar menu" : "Abrir menu"
+      );
     });
 
     navLinks.querySelectorAll("a").forEach(link => {
@@ -945,7 +1041,7 @@
       });
     });
 
-    // GALERIA AMPLIADA
+    // GALERIA COM AMPLIAÇÃO
 
     const lightbox = document.getElementById("lightbox");
     const lightboxImage = document.getElementById("lightboxImage");
@@ -974,15 +1070,37 @@
       lightboxImage.src = "";
     });
 
-    // PROGRESSO DO PROJETO: ALTERE O NÚMERO ABAIXO
+    // PROGRESSO: ALTERE PARA O PERCENTUAL REAL
 
     const progresso = 25;
     const valor = Math.max(0, Math.min(100, progresso));
 
     document.getElementById("progressValue").textContent = valor + "%";
     document.getElementById("progressFill").style.width = valor + "%";
+
+    // DESTAQUE DA SEÇÃO ATUAL NO MENU
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          navLinks.querySelectorAll("a").forEach(link => {
+            const ativo =
+              link.getAttribute("href") === "#" + entry.target.id;
+
+            link.classList.toggle("active", ativo);
+          });
+        });
+      }, {
+        rootMargin: "-25% 0px -65% 0px"
+      });
+
+      document.querySelectorAll("main section[id]").forEach(section => {
+        observer.observe(section);
+      });
+    }
   </script>
 
 </body>
 </html>
-
