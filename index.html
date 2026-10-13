@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#09090c">
 
-  <title>O Último Sinal | Jogo 2D</title>
+  <title>O Último Sinal | Projeto de Jogo 2D</title>
+
   <meta name="description" content="Conheça O Último Sinal, um projeto escolar de jogo 2D desenvolvido por estudantes da ETE Professor Paulo Freire.">
 
   <style>
@@ -56,7 +57,7 @@
       margin: auto;
     }
 
-    /* MENU */
+    /* NAVEGAÇÃO */
 
     header {
       position: sticky;
@@ -90,7 +91,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 20px;
       list-style: none;
     }
 
@@ -107,10 +108,10 @@
 
     .menu-toggle {
       display: none;
-      background: var(--panel);
-      color: white;
-      border: 1px solid var(--border);
       padding: 7px 12px;
+      color: white;
+      background: var(--panel);
+      border: 1px solid var(--border);
       border-radius: 4px;
       cursor: pointer;
     }
@@ -121,13 +122,9 @@
       min-height: 620px;
       display: flex;
       align-items: center;
-      position: relative;
       overflow: hidden;
       background:
-        linear-gradient(90deg,
-          rgba(9,9,12,.98),
-          rgba(9,9,12,.82) 50%,
-          rgba(9,9,12,.35)),
+        linear-gradient(90deg, rgba(9,9,12,.98), rgba(9,9,12,.78) 55%, rgba(9,9,12,.35)),
         linear-gradient(0deg, var(--bg), transparent 35%),
         url("assets/capa.jpg") center / cover no-repeat,
         #171116;
@@ -150,10 +147,10 @@
     }
 
     h1 {
+      margin: 22px 0;
       font-size: clamp(3.2rem, 8vw, 6.3rem);
       line-height: .98;
       letter-spacing: -3px;
-      margin: 22px 0;
     }
 
     h1 span {
@@ -162,14 +159,14 @@
 
     .hero-description {
       max-width: 560px;
-      color: #c4c4cd;
       margin-bottom: 30px;
+      color: #c4c4cd;
     }
 
     .button {
       display: inline-block;
-      padding: 12px 20px;
       margin: 0 8px 8px 0;
+      padding: 12px 20px;
       border: 1px solid transparent;
       border-radius: 4px;
       font-size: .9rem;
@@ -190,8 +187,8 @@
     }
 
     .secondary {
-      border-color: #55555f;
       background: rgba(10,10,14,.6);
+      border-color: #55555f;
     }
 
     .secondary:hover {
@@ -208,16 +205,16 @@
       letter-spacing: 1.5px;
     }
 
-    /* SEÇÕES */
+    /* ESTRUTURA DAS SEÇÕES */
 
     section {
       padding: 85px 0;
     }
 
     h2 {
+      margin: 12px 0 18px;
       font-size: clamp(2rem, 5vw, 3rem);
       line-height: 1.2;
-      margin: 12px 0 18px;
       letter-spacing: -1px;
     }
 
@@ -239,7 +236,7 @@
       border-block: 1px solid #202027;
     }
 
-    /* APRESENTAÇÃO */
+    /* SOBRE O JOGO */
 
     .about-grid {
       display: grid;
@@ -261,7 +258,7 @@
       border-radius: 5px;
     }
 
-    /* CARTÕES */
+    /* CARACTERÍSTICAS */
 
     .cards {
       display: grid;
@@ -336,12 +333,12 @@
     }
 
     .gallery-item {
+      overflow: hidden;
       color: white;
       text-align: left;
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 5px;
-      overflow: hidden;
       cursor: zoom-in;
     }
 
@@ -364,7 +361,7 @@
       font-size: .9rem;
     }
 
-    /* DESENVOLVIMENTO */
+    /* ETAPAS DE DESENVOLVIMENTO */
 
     .timeline {
       max-width: 760px;
@@ -383,12 +380,12 @@
     }
 
     .step::before {
-      content: "";
       position: absolute;
       top: 8px;
       left: -34px;
       width: 11px;
       height: 11px;
+      content: "";
       background: var(--red);
       border-radius: 50%;
     }
@@ -462,52 +459,53 @@
       border-radius: 5px;
     }
 
-    .development-text {
+    .development-text,
+    .team-details {
       min-width: 0;
     }
 
     .development-text h3 {
-      font-size: 1.5rem;
       margin: 10px 0 16px;
+      font-size: 1.5rem;
     }
 
     .development-text p {
       margin-bottom: 16px;
     }
 
-    .team-details {
-      min-width: 0;
-    }
-
     .team-details p {
       margin-bottom: 12px;
       color: var(--muted);
+      overflow-wrap: anywhere;
     }
 
     .team-details strong {
       color: white;
+      font-weight: 600;
     }
 
+    /* Lista de estudantes no mesmo padrão das outras informações */
+
     .students-title {
-      display: block;
-      margin: 20px 0 10px;
-      color: white;
-      font-weight: bold;
+      margin-top: 16px;
     }
 
     .members {
       display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
+      flex-direction: column;
+      gap: 5px;
+      margin: 0 0 16px;
     }
 
     .member {
-      display: inline-block;
-      padding: 8px 12px;
-      background: #1c1c23;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      font-size: .88rem;
+      display: block;
+      padding: 0;
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      font-size: 1rem;
+      line-height: 1.7;
     }
 
     /* RODAPÉ */
@@ -526,18 +524,18 @@
     }
 
     footer p,
-    footer a:last-child {
+    footer .footer-link {
       color: var(--muted);
       font-size: .84rem;
     }
 
-    /* IMAGENS AMPLIADAS */
+    /* VISUALIZADOR DE IMAGENS */
 
     dialog {
       width: min(950px, 92vw);
       max-height: 90vh;
-      margin: auto;
       padding: 20px;
+      margin: auto;
       color: white;
       background: #121217;
       border: 1px solid var(--border);
@@ -557,14 +555,14 @@
 
     dialog p {
       margin-top: 12px;
-      text-align: center;
       color: var(--muted);
+      text-align: center;
     }
 
     .close {
       display: block;
-      margin: 0 0 12px auto;
       padding: 6px 12px;
+      margin: 0 0 12px auto;
       color: white;
       background: transparent;
       border: 1px solid var(--border);
@@ -612,6 +610,8 @@
         padding: 24px;
       }
     }
+
+    /* TELAS MENORES */
 
     @media (max-width: 760px) {
       .about-grid,
@@ -691,7 +691,8 @@
 
 <body>
 
-  <!-- MENU -->
+  <!-- MENU PRINCIPAL -->
+
   <header>
     <nav class="container">
       <a href="#inicio" class="logo">O ÚLTIMO <span>SINAL</span></a>
@@ -719,6 +720,7 @@
   <main>
 
     <!-- CAPA -->
+
     <section class="hero" id="inicio">
       <div class="container hero-content">
         <span class="eyebrow">PROJETO ESCOLAR • JOGO 2D</span>
@@ -748,6 +750,7 @@
     </section>
 
     <!-- SOBRE O JOGO -->
+
     <section id="sobre">
       <div class="container about-grid">
         <div>
@@ -780,6 +783,7 @@
     </section>
 
     <!-- CARACTERÍSTICAS -->
+
     <section class="dark-section">
       <div class="container">
         <span class="section-tag">02 / EXPERIÊNCIA</span>
@@ -822,6 +826,7 @@
     </section>
 
     <!-- PERSONAGENS -->
+
     <section id="personagens">
       <div class="container">
         <span class="section-tag">03 / UNIVERSO</span>
@@ -867,6 +872,7 @@
     </section>
 
     <!-- GALERIA -->
+
     <section class="dark-section" id="galeria">
       <div class="container">
         <span class="section-tag">04 / REGISTROS</span>
@@ -914,6 +920,7 @@
     </section>
 
     <!-- DESENVOLVIMENTO -->
+
     <section id="desenvolvimento">
       <div class="container">
         <span class="section-tag">05 / PRODUÇÃO</span>
@@ -990,6 +997,7 @@
     </section>
 
     <!-- EQUIPE -->
+
     <section class="dark-section" id="equipe">
       <div class="container">
         <span class="section-tag">06 / NOSSA EQUIPE</span>
@@ -1008,7 +1016,8 @@
 
         <div class="team-box">
 
-          <!-- COLUNA ESQUERDA: SOMENTE O TEXTO DA EQUIPE -->
+          <!-- ESQUERDA: DESCRIÇÃO DA EQUIPE -->
+
           <div class="development-text">
             <span class="small-label">EQUIPE DE DESENVOLVIMENTO</span>
 
@@ -1024,7 +1033,8 @@
             </p>
           </div>
 
-          <!-- COLUNA DIREITA: PROFESSOR, ESCOLA E ESTUDANTES -->
+          <!-- DIREITA: TODAS AS INFORMAÇÕES INSTITUCIONAIS -->
+
           <div class="team-details">
             <p>
               <strong>Projeto:</strong> O Último Sinal
@@ -1038,7 +1048,9 @@
               <strong>Professor orientador:</strong> Vinicius Marques
             </p>
 
-            <p class="students-title">Estudantes</p>
+            <p class="students-title">
+              <strong>Estudantes:</strong>
+            </p>
 
             <div class="members">
               <span class="member">Fernando José</span>
@@ -1048,7 +1060,7 @@
               <span class="member">Natanael Rodrigues</span>
             </div>
 
-            <p style="margin-top: 20px;">
+            <p>
               <strong>Ano letivo:</strong> 2026
             </p>
 
@@ -1068,17 +1080,19 @@
   </main>
 
   <!-- RODAPÉ -->
+
   <footer>
     <div class="container footer-content">
       <a href="#inicio" class="logo">O ÚLTIMO <span>SINAL</span></a>
 
       <p>Projeto escolar • ETE Professor Paulo Freire</p>
 
-      <a href="#inicio">Voltar ao topo ↑</a>
+      <a href="#inicio" class="footer-link">Voltar ao topo ↑</a>
     </div>
   </footer>
 
   <!-- VISUALIZADOR DA GALERIA -->
+
   <dialog id="lightbox">
     <button class="close" id="closeLightbox">Fechar ✕</button>
     <img id="lightboxImage" src="" alt="">
@@ -1109,7 +1123,7 @@
       });
     });
 
-    // GALERIA COM AMPLIAÇÃO
+    // AMPLIAÇÃO DAS IMAGENS
 
     const lightbox = document.getElementById("lightbox");
     const lightboxImage = document.getElementById("lightboxImage");
@@ -1139,7 +1153,7 @@
     });
 
     // PROGRESSO DO PROJETO
-    // Troque 25 pelo percentual real quando necessário.
+    // Altere o valor conforme o progresso real.
 
     const progresso = 25;
     const valor = Math.max(0, Math.min(100, progresso));
