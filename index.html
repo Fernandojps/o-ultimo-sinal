@@ -17,10 +17,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 85px;
-}
+html { scroll-behavior: smooth; scroll-padding-top: 85px; }
 
 body {
   background: var(--bg);
@@ -32,10 +29,7 @@ body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; }
 
-.container {
-  width: min(1100px, 90%);
-  margin: auto;
-}
+.container { width: min(1100px, 90%); margin: auto; }
 
 header {
   position: sticky;
@@ -53,25 +47,11 @@ nav {
   gap: 20px;
 }
 
-.logo {
-  font-weight: 900;
-  letter-spacing: 2px;
-  white-space: nowrap;
-}
-
+.logo { font-weight: 900; letter-spacing: 2px; white-space: nowrap; }
 .logo span, h1 span { color: var(--red); }
 
-.nav-links {
-  display: flex;
-  gap: 22px;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--muted);
-  font-size: .9rem;
-}
-
+.nav-links { display: flex; gap: 22px; list-style: none; }
+.nav-links a { color: var(--muted); font-size: .9rem; }
 .nav-links a:hover { color: white; }
 
 .hero {
@@ -101,11 +81,7 @@ h1 {
   letter-spacing: -3px;
 }
 
-.hero-description {
-  max-width: 480px;
-  margin-bottom: 28px;
-  color: #c4c4cd;
-}
+.hero-description { max-width: 480px; margin-bottom: 28px; color: #c4c4cd; }
 
 .button {
   display: inline-block;
@@ -116,11 +92,7 @@ h1 {
   font-size: .9rem;
 }
 
-.primary {
-  background: var(--red);
-  border-color: var(--red);
-}
-
+.primary { background: var(--red); border-color: var(--red); }
 .secondary { background: #17171d; }
 
 .hero-character {
@@ -162,10 +134,7 @@ h1 {
 
 section.content-section { padding: 85px 0; }
 
-.dark-section {
-  background: #101014;
-  border-block: 1px solid #202027;
-}
+.dark-section { background: #101014; border-block: 1px solid #202027; }
 
 h2 {
   margin: 12px 0 18px;
@@ -175,11 +144,7 @@ h2 {
 
 h3 { line-height: 1.35; }
 .muted { color: var(--muted); }
-
-.intro {
-  max-width: 690px;
-  margin-bottom: 32px;
-}
+.intro { max-width: 690px; margin-bottom: 32px; }
 
 .about-grid {
   display: grid;
@@ -201,16 +166,9 @@ h3 { line-height: 1.35; }
   overflow: hidden;
 }
 
-.about-art img {
-  width: min(260px, 80%);
-  image-rendering: pixelated;
-}
+.about-art img { width: min(260px, 80%); image-rendering: pixelated; }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 
 .card {
   padding: 26px;
@@ -219,21 +177,12 @@ h3 { line-height: 1.35; }
   border-radius: 5px;
 }
 
-.card .number {
-  color: #ed6470;
-  font-weight: bold;
-}
-
+.card .number { color: #ed6470; font-weight: bold; }
 .card h3 { margin: 12px 0; }
 .card p { color: var(--muted); font-size: .92rem; }
 
 /* GALERIA */
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
+.gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 
 .gallery-item {
   display: block;
@@ -246,6 +195,8 @@ h3 { line-height: 1.35; }
   padding: 0;
   color: var(--text);
 }
+
+.gallery-item[hidden] { display: none; }
 
 .gallery-item img {
   display: block;
@@ -273,22 +224,8 @@ h3 { line-height: 1.35; }
   margin-bottom: 3px;
 }
 
-.gallery-note {
-  margin-top: 18px;
-  color: var(--muted);
-  font-size: .85rem;
-}
-
-.timeline {
-  max-width: 750px;
-  padding-left: 25px;
-  border-left: 1px solid #41414b;
-}
-
-.step {
-  position: relative;
-  padding: 0 0 28px;
-}
+.timeline { max-width: 750px; padding-left: 25px; border-left: 1px solid #41414b; }
+.step { position: relative; padding: 0 0 28px; }
 
 .step:before {
   position: absolute;
@@ -303,12 +240,7 @@ h3 { line-height: 1.35; }
 
 .step h3 { margin: 6px 0; }
 
-.tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 25px;
-}
+.tech { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
 
 .tech span {
   padding: 7px 13px;
@@ -329,32 +261,14 @@ h3 { line-height: 1.35; }
   border-radius: 5px;
 }
 
-.development-text h3 {
-  margin: 12px 0;
-  font-size: 1.5rem;
-}
-
-.team-details p {
-  margin-bottom: 12px;
-  color: var(--muted);
-}
-
+.development-text h3 { margin: 12px 0; font-size: 1.5rem; }
+.team-details p { margin-bottom: 12px; color: var(--muted); }
 .team-details strong { color: white; }
 .students-title { margin-top: 16px; }
-
-.members {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-bottom: 16px;
-}
-
+.members { display: flex; flex-direction: column; gap: 5px; margin-bottom: 16px; }
 .member { color: var(--muted); }
 
-footer {
-  padding: 30px 0;
-  border-top: 1px solid var(--border);
-}
+footer { padding: 30px 0; border-top: 1px solid var(--border); }
 
 .footer-content {
   display: flex;
@@ -364,10 +278,7 @@ footer {
   gap: 18px;
 }
 
-footer p {
-  color: var(--muted);
-  font-size: .85rem;
-}
+footer p { color: var(--muted); font-size: .85rem; }
 
 @keyframes flutuar {
   0%, 100% { transform: translateY(0); }
@@ -375,7 +286,6 @@ footer p {
 }
 
 /* IMAGEM AMPLIADA */
-
 .lightbox {
   position: fixed;
   inset: 0;
@@ -388,12 +298,7 @@ footer p {
 }
 
 .lightbox.open { display: flex; }
-
-.lightbox-inner {
-  max-width: min(1000px, 95vw);
-  max-height: 90vh;
-  text-align: center;
-}
+.lightbox-inner { max-width: min(1000px, 95vw); max-height: 90vh; text-align: center; }
 
 .lightbox img {
   max-width: 100%;
@@ -416,20 +321,13 @@ footer p {
 }
 
 @media(max-width:760px) {
-  .hero {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding-top: 20px;
-  }
-
+  .hero { grid-template-columns: 1fr; text-align: center; padding-top: 20px; }
   .hero-content { padding: 60px 0 0; }
   .hero-description { margin-inline: auto; }
   .metadata { justify-content: center; }
   .hero-character { min-height: 300px; margin-top: -20px; }
   .hero-character img { width: min(300px, 75%); }
-
   .about-grid, .cards, .team-box { grid-template-columns: 1fr; }
-
   section.content-section { padding: 60px 0; }
   .gallery-item img { height: 220px; }
 }
@@ -449,7 +347,6 @@ footer p {
 <header>
   <nav class="container">
     <a href="#inicio" class="logo">O ÚLTIMO <span>SINAL</span></a>
-
     <ul class="nav-links">
       <li><a href="#inicio">Início</a></li>
       <li><a href="#sobre">O jogo</a></li>
@@ -466,17 +363,13 @@ footer p {
   <section class="hero" id="inicio">
     <div class="container hero-content">
       <span class="eyebrow">PROJETO ESCOLAR • JOGO 2D</span>
-
       <h1>O Último<br><span>Sinal.</span></h1>
-
       <p class="hero-description">
         Quando os corredores ficam vazios, a escola revela um lado que ninguém deveria conhecer.
         Um projeto de jogo 2D de terror desenvolvido na Unity.
       </p>
-
       <a class="button primary" href="#sobre">Conhecer o projeto</a>
       <a class="button secondary" href="#galeria">Ver imagens</a>
-
       <div class="metadata">
         <span>TERROR</span>
         <span>2D</span>
@@ -485,7 +378,7 @@ footer p {
     </div>
 
     <div class="hero-character">
-      <img src="assets/personagem_frente_unico.png" alt="Personagem de frente">
+      <img src="assets/personagem_frente_unico.png" alt="Personagem de O Último Sinal">
     </div>
   </section>
 
@@ -495,24 +388,21 @@ footer p {
       <div>
         <span class="section-tag">01 / APRESENTAÇÃO</span>
         <h2>Sobre o jogo</h2>
-
         <p class="muted">
           O Último Sinal é um projeto de jogo 2D com temática de terror,
           desenvolvido por estudantes da ETE Professor Paulo Freire.
         </p>
-
         <p class="muted">
           A proposta é criar uma experiência sombria ambientada no espaço escolar,
           combinando exploração, iluminação e desafios.
         </p>
-
         <p class="muted">
           Este site acompanha o progresso do projeto e reúne informações sobre sua criação.
         </p>
       </div>
 
       <div class="about-art">
-        <img src="assets/personagem_unico.png" alt="Personagem principal em pixel art">
+        <img src="assets/personagem_frente_unico.png" alt="Personagem principal em pixel art">
       </div>
     </div>
   </section>
@@ -530,13 +420,11 @@ footer p {
           <h3>Exploração</h3>
           <p>Investigue os ambientes e descubra o que existe nos corredores da escola.</p>
         </article>
-
         <article class="card">
           <span class="number">02</span>
           <h3>Atmosfera sombria</h3>
           <p>Iluminação e arte visual ajudam a construir a identidade de terror.</p>
         </article>
-
         <article class="card">
           <span class="number">03</span>
           <h3>Desenvolvimento 2D</h3>
@@ -551,7 +439,6 @@ footer p {
     <div class="container">
       <span class="section-tag">03 / REGISTROS</span>
       <h2>Galeria do projeto</h2>
-
       <p class="muted intro">
         Confira os personagens, cenários e registros do desenvolvimento.
         Clique em uma imagem para ampliá-la.
@@ -560,9 +447,21 @@ footer p {
       <div class="gallery-grid">
 
         <button class="gallery-item" type="button"
+          data-full="assets/personagem_frente_unico.png"
+          data-title="Personagem de frente">
+          <img src="assets/personagem_frente_unico.png" alt="Personagem de frente em pixel art"
+            onerror="this.closest('.gallery-item').hidden=true">
+          <span class="gallery-caption">
+            <strong>Personagem de frente</strong>
+            Sprite do protagonista
+          </span>
+        </button>
+
+        <button class="gallery-item" type="button"
           data-full="assets/personagem_unico.png"
           data-title="Personagem principal">
-          <img src="assets/personagem_unico.png" alt="Personagem principal em pixel art">
+          <img src="assets/personagem_unico.png" alt="Personagem principal em pixel art"
+            onerror="this.closest('.gallery-item').hidden=true">
           <span class="gallery-caption">
             <strong>Personagem principal</strong>
             Arte em pixel do protagonista
@@ -614,12 +513,6 @@ footer p {
         </button>
 
       </div>
-
-      <p class="gallery-note">
-        O personagem principal já está incluído.
-        As demais imagens aparecem quando os arquivos correspondentes são enviados para a pasta
-        <code>assets</code>.
-      </p>
     </div>
   </section>
 
@@ -628,7 +521,6 @@ footer p {
     <div class="container">
       <span class="section-tag">04 / PRODUÇÃO</span>
       <h2>Desenvolvimento</h2>
-
       <p class="muted intro">
         O projeto evolui gradualmente, com implementação, testes e melhorias em cada etapa.
       </p>
@@ -639,19 +531,16 @@ footer p {
           <h3>Planejamento</h3>
           <p class="muted">Definição da proposta e dos elementos principais.</p>
         </article>
-
         <article class="step">
           <span class="section-tag">ETAPA 02</span>
           <h3>Personagem e movimentação</h3>
           <p class="muted">Criação do personagem e implementação dos controles.</p>
         </article>
-
         <article class="step">
           <span class="section-tag">ETAPA 03</span>
           <h3>Construção do cenário</h3>
           <p class="muted">Desenvolvimento do mapa e da ambientação.</p>
         </article>
-
         <article class="step">
           <span class="section-tag">ETAPA 04</span>
           <h3>Mecânicas e testes</h3>
@@ -660,7 +549,6 @@ footer p {
       </div>
 
       <h3>Tecnologias utilizadas</h3>
-
       <div class="tech">
         <span>Unity</span>
         <span>C#</span>
@@ -687,7 +575,6 @@ footer p {
         <div class="development-text">
           <span class="section-tag">EQUIPE DE DESENVOLVIMENTO</span>
           <h3>O Último Sinal</h3>
-
           <p class="muted">
             Este projeto representa nossa dedicação ao aprendizado, à criatividade e ao trabalho
             em equipe. Mesmo no início de nossa trajetória, buscamos superar dificuldades,
@@ -702,7 +589,6 @@ footer p {
           <p><strong>Professor orientador:</strong> Vinicius Marques</p>
 
           <p class="students-title"><strong>Estudantes:</strong></p>
-
           <div class="members">
             <span class="member">Fernando José</span>
             <span class="member">Adailton Pereira</span>
@@ -752,11 +638,9 @@ function closeLightbox() {
 document.querySelectorAll('.gallery-item').forEach(item => {
   item.addEventListener('click', () => {
     const image = item.querySelector('img');
-
     lightboxImage.src = item.dataset.full;
     lightboxImage.alt = image.alt;
     lightboxCaption.textContent = item.dataset.title || image.alt;
-
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
   });
